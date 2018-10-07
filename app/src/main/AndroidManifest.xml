@@ -22,6 +22,9 @@
         <activity
             android:name=".AddBook"
             android:parentActivityName=".MainActivity"></activity>
+
+        <activity android:name=".BookView"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 
