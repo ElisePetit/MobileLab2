@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class BookView extends AppCompatActivity {
 public int position;
@@ -15,6 +16,7 @@ EditText author;
 EditText ISBN;
 EditText price;
 EditText course;
+    TextView info;
 
 public Book book;
 
@@ -31,6 +33,7 @@ public Book book;
         ISBN = (EditText) findViewById(R.id.input_isbn);
         price = (EditText) findViewById(R.id.input_price);
         course = (EditText) findViewById(R.id.input_course);
+        info = (TextView) findViewById(R.id.info_text) ;
 
         title.setText(book.getTitle());
         author.setText(book.getAuthor());
@@ -52,11 +55,14 @@ public Book book;
             book.setPrice(0);
         }
         SimpleBookManager.getInstance().library.saveChanges();
+
+        info.setVisibility(View.VISIBLE);
     }
 
     public void deleteBook(View view) {
         SimpleBookManager.getInstance().library.removeBook(book);
         SimpleBookManager.getInstance().library.saveChanges();
+        info.setVisibility(View.VISIBLE);
     }
 
 }
