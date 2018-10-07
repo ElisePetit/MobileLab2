@@ -61,5 +61,8 @@ public class Book {
         this.course = course;
     }
 
-
+    @Override
+    public String toString() {
+        return title + " by " + author;
+    }
 }
