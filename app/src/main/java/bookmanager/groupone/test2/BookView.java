@@ -28,7 +28,7 @@ public Book book;
         Log.d("TAG", book.getAuthor());
         title = (EditText) findViewById(R.id.input_title);
         author = (EditText) findViewById(R.id.input_author);
-        ISBN = (EditText) findViewById(R.id.input_ISBN);
+        ISBN = (EditText) findViewById(R.id.input_isbn);
         price = (EditText) findViewById(R.id.input_price);
         course = (EditText) findViewById(R.id.input_course);
 
