@@ -1,8 +1,14 @@
 package bookmanager.groupone.test2;
 
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+
 
 public class SimpleBookManager implements BookManager {
 
@@ -21,12 +27,13 @@ public class SimpleBookManager implements BookManager {
 
     public SimpleBookManager() {
         this.books = new ArrayList<Book>();
+
         this.createNonEmptyBook("J.K Rolling", "Harry Potter", 199, "12345", "Fiction for Engineers");
         this.createNonEmptyBook("Baudelaire", "Les Fleurs du Mal", 110, "12346", "French");
         this.createNonEmptyBook("Isaac Asimov", "Foundation", 230, "12347", "Fiction for Engineers");
         this.createNonEmptyBook("Amélie Nothomb", "Stupeur et tremblements", 190, "12348", "French");
         this.createNonEmptyBook("Daniel Keyes", "Flowers for Algernon", 190, "12349", "Philosophy");
-        Log.d("first book",this.getBook(0).getTitle());
+
         this.library = this;
     }
 
@@ -143,6 +150,22 @@ public class SimpleBookManager implements BookManager {
 
     @Override
     public void saveChanges() {
+        Gson gson = new Gson();
+        FileWriter fw;
+        File sdCardFile = new File(Environment.getExternalStorageDirectory() + " \book.json");
+        Log.d("BOOK", sdCardFile.getPath());
+        try{
+            fw = new FileWriter(sdCardFile, true);
+            for (int i = 0; i<books.size(); i++)
+            {
+                gson.toJson(books.get(i), fw);
+            }
+            fw.flush();
+            fw.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 }

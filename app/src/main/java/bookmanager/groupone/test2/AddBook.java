@@ -54,6 +54,8 @@ public class AddBook extends AppCompatActivity {
             Book book = SimpleBookManager.getInstance().library.createNonEmptyBook(
                     author, title, tryParseInt(price), isbn, course);
 
+            SimpleBookManager.getInstance().saveChanges();
+
             //super.onBackPressed();
         }
         else

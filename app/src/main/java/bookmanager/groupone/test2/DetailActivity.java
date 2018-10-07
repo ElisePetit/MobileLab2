@@ -1,5 +1,6 @@
 package bookmanager.groupone.test2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -13,6 +14,15 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            Book book = (Book) bd.get("item");
+            //do something
+        }
+
+        /*
         ArrayList<Book> bookList = SimpleBookManager.getInstance().library.getAllBooks();
         Book book = bookList.get(0);
 
@@ -30,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView courseTextView = (TextView) findViewById(R.id.course);
         courseTextView.setText(book.getCourse());
+        */
 
     }
 }

@@ -24,27 +24,31 @@ public class MainFragment extends Fragment {
 
 
         ArrayList<Book> aList = SimpleBookManager.getInstance().library.getAllBooks();
-        List<String> stringList = new ArrayList<>(aList.size());
-        for (Book oneBook : aList) {
-            stringList.add(oneBook.getTitle());
-        }
+
+        //List<String> stringList = new ArrayList<>(aList.size());
+        //for (Book oneBook : aList) {
+        //    stringList.add(oneBook.getTitle());
+        //}
 
         ListView listView = (ListView) root.findViewById(R.id.book_list);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1, stringList );
+        ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this.getContext(),android.R.layout.simple_list_item_1,aList);
 
-        listView.setAdapter(arrayAdapter);
+        //ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1, stringList );
 
-        /*listView.setOnItemClickListener(new AdapterView.onItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(this, DetailActivity.class);
-                startActivity(appInfo);
-            }
-        });
-        */
+        listView.setAdapter(adapter);
+
+        //listView.setOnItemClickListener(mMessageClickedHandler);
 
         return root;
     }
+/*
+    private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
+            Intent intent = new Intent(this.getContext(), DetailActivity.class);
+            intent.putExtra("item", this.mAdapter.getItem(position - 1));
+            startActivity(intent);
+        }
+    };*/
 }
 
