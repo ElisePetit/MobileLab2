@@ -1,10 +1,12 @@
 package bookmanager.groupone.test2;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class AddBook extends AppCompatActivity {
     EditText titleInput;
@@ -12,6 +14,7 @@ public class AddBook extends AppCompatActivity {
     EditText courseInput;
     EditText isbnInput;
     EditText priceInput;
+    TextView info;
 
     Button saveButton;
 
@@ -27,6 +30,8 @@ public class AddBook extends AppCompatActivity {
         isbnInput = (EditText) findViewById(R.id.courseInput);
         priceInput = (EditText) findViewById(R.id.priceInput) ;
 
+        info = (TextView) findViewById(R.id.info_text) ;
+
         saveButton = (Button) findViewById(R.id.saveButton);
 
     }
@@ -39,7 +44,7 @@ public class AddBook extends AppCompatActivity {
         String isbn = isbnInput.getText().toString();
         String course = courseInput.getText().toString();
 
-        if( title != null && title.trim() != "" ) {
+        if( title != null && title.trim() != "" && !title.isEmpty() ) {
 
             if(author == null){
                 author = "";
@@ -56,17 +61,16 @@ public class AddBook extends AppCompatActivity {
 
             SimpleBookManager.getInstance().saveChanges();
 
-            //super.onBackPressed();
+            info.setVisibility(View.VISIBLE);
+            info.setTextColor(Color.GREEN);
+            info.setText("Sucess! Go back to see changes");
+
         }
         else
-            {
-                /*
-            new AlertDialog.Builder(this)
-                    .setTitle("No Title")
-                    .setMessage("You can't add a book without a title")
-                    .setCancelable(false)
-                    .show();
-                    */
+        {
+            info.setVisibility(View.VISIBLE);
+            info.setTextColor(Color.RED);
+            info.setText("Error! The book needs a title");
         }
     }
 

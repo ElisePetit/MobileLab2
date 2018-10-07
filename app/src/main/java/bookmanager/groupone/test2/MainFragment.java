@@ -25,20 +25,25 @@ public class MainFragment extends Fragment {
 
         ArrayList<Book> aList = SimpleBookManager.getInstance().library.getAllBooks();
 
-        //List<String> stringList = new ArrayList<>(aList.size());
-        //for (Book oneBook : aList) {
-        //    stringList.add(oneBook.getTitle());
-        //}
-
-        ListView listView = (ListView) root.findViewById(R.id.book_list);
+        final ListView listView = (ListView) root.findViewById(R.id.book_list);
 
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this.getContext(),android.R.layout.simple_list_item_1,aList);
 
-        //ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1, stringList );
-
         listView.setAdapter(adapter);
 
-        //listView.setOnItemClickListener(mMessageClickedHandler);
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                Object o = listView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), BookView.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+
+            }
+        });
 
         return root;
     }

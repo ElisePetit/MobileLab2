@@ -16,6 +16,8 @@ public class SimpleBookManager implements BookManager {
 
     public SimpleBookManager library;
 
+    String bookListJsonString;
+
     public static synchronized SimpleBookManager getInstance() {
         if(mInstance == null){
             mInstance = new SimpleBookManager();
@@ -151,21 +153,14 @@ public class SimpleBookManager implements BookManager {
     @Override
     public void saveChanges() {
         Gson gson = new Gson();
-        FileWriter fw;
-        File sdCardFile = new File(Environment.getExternalStorageDirectory() + " \book.json");
-        Log.d("BOOK", sdCardFile.getPath());
-        try{
-            fw = new FileWriter(sdCardFile, true);
-            for (int i = 0; i<books.size(); i++)
-            {
-                gson.toJson(books.get(i), fw);
-            }
-            fw.flush();
-            fw.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        this.bookListJsonString = gson.toJson(books);
+        Log.d("TAG", bookListJsonString.toString());
+    }
 
+    public ArrayList loadChanges() {
+        Gson gson = new Gson();
+        ArrayList bookListDtoArray = gson.fromJson(bookListJsonString, ArrayList.class);
 
+        return bookListDtoArray;
     }
 }
